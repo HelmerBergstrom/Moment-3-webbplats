@@ -1,0 +1,77 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+body {
+    background-color: burlywood;
+    font-family: Arial, Helvetica, sans-serif;
+}
+header {
+    background-color: rgb(221, 147, 51);
+}
+.menu {
+    display: flex;
+    justify-content: center;
+}
+.menu li {
+    padding: 20px;
+    list-style: none;
+}
+.menu li a {
+    text-decoration: none;
+    color: black;
+    font-weight: bolder;
+    padding: 10px;
+    border-radius: 20px;
+    transition: 0.5s ease;
+}
+
+.menu a:hover {
+    background-color: rgb(63, 41, 13);
+    color: white;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 30px;
+    color: black;
+}
+
+#experienceList {
+    color: white;
+    margin: 30px;
+}
+
+#experienceList article {
+    background-color: #333;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+#experienceList h2:first-of-type {
+    text-transform: uppercase;
+}
+#experienceList h2:last-of-type {
+    margin-bottom: 20px;
+}
+#experienceList p:last-of-type {
+    margin-top: 10px;
+}
+
+.delete-btn {
+    padding: 10px;
+    font-size: 16px;
+    margin-top: 20px;
+    background-color: rgb(204, 103, 103);
+    color:white;
+    border: 1px solid #1A1A1A;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.5s ease;
+}
+.delete-btn:hover {
+    background-color: red;
+}

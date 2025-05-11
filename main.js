@@ -13,13 +13,23 @@ if(list) {
             data.forEach(erf => {
                 const article = document.createElement("article");
 
-                article.innerHTML = `
-                <h2> ${erf.companyname} </h2>
-                <h2> ${erf.task} </h2>
-                <p><strong> ${erf.city} </strong></p>
-                <p><strong> ${erf.howlong} </strong></p>
-                <button class="delete-btn" data-id="${erf._id}"> RADERA </button> 
-                `
+                if(erf.howlongM === 0) {
+                    article.innerHTML = `
+                        <h2> ${erf.companyname} </h2>
+                        <h2> ${erf.task} </h2>
+                        <p><strong> ${erf.city} </strong></p>
+                        <p><strong> ${erf.howlongY} år </strong></p>
+                        <button class="delete-btn" data-id="${erf._id}"> RADERA </button> 
+                    `
+                } else {
+                    article.innerHTML = `
+                        <h2> ${erf.companyname} </h2>
+                        <h2> ${erf.task} </h2>
+                        <p><strong> ${erf.city} </strong></p>
+                        <p><strong> ${erf.howlongY} år och ${erf.howlongM} månader </strong></p>
+                        <button class="delete-btn" data-id="${erf._id}"> RADERA </button> 
+                    `
+                }
 
                 list.appendChild(article);
 
