@@ -65,11 +65,11 @@ if(list) {
                 editBtn.addEventListener("click", () => {
                     article.innerHTML = `
                         <form class="edit-form">
-                            <label> Företagsnamn: <input name="companyname" value="${erf.companyname}" required></label>
-                            <label> Uppgift: <input name="task" value="${erf.task}" required></label>
-                            <label> Stad: <input name="city" value="${erf.city}" required></label>
-                            <label> År: <input name="howlongY" type="number" value="${erf.howlongY}" required></label>
-                            <label> Månader: <input name="howlongM" type="number" value="${erf.howlongM}" required></label>
+                            <label> Företagsnamn: <input name="companyname" value="${erf.companyname}"></label>
+                            <label> Uppgift: <input name="task" value="${erf.task}"></label>
+                            <label> Stad: <input name="city" value="${erf.city}"></label>
+                            <label> År: <input name="howlongY" type="number" value="${erf.howlongY}"></label>
+                            <label> Månader: <input name="howlongM" type="number" value="${erf.howlongM}"></label>
                             <button type="submit"> SPARA ÄNDRINGAR </button>
                         </form>
                     `;
