@@ -6,9 +6,8 @@ if(list) {
     fetch(url)
         .then(response => response.json())
         .then(data => {
-            console.log("Data från servern:", data);
-            if(!data) {
-                list.innerHTML = `<p> Inga erfarenhter finns att hämta! 
+            if(data.length === 0) {
+                list.innerHTML = `<p id="noData"> Inga erfarenhter finns att hämta! 
                 Lägg till under fliken <a href="add.html"> LÄGG TILL </a></p>`
             }
             data.forEach(erf => {
@@ -20,7 +19,8 @@ if(list) {
                         <h3> ${erf.task} </h3>
                         <p><strong> Vart: ${erf.city} </strong></p>
                         <p><strong> Tid: ${erf.howlongY} år </strong></p>
-                        <button class="delete-btn" data-id="${erf._id}"> RADERA 🗑️ </button> 
+                        <button class="delete-btn"> RADERA 🗑️ </button> 
+                        <button class="edit-btn"> ÄNDRA ✏️ </button>
                     `
                 } else {
                     article.innerHTML = `
@@ -28,25 +28,21 @@ if(list) {
                         <h3> ${erf.task} </h3>
                         <p><strong> Vart: ${erf.city} </strong></p>
                         <p><strong> Tid: ${erf.howlongY} år och ${erf.howlongM} månader </strong></p>
-                        <button class="delete-btn" data-id="${erf._id}"> RADERA 🗑️ </button> 
-
+                        <button class="delete-btn"> RADERA 🗑️ </button> 
+                        <button class="edit-btn"> ÄNDRA ✏️ </button>
                     `
                 }
 
                 list.appendChild(article);
-
+                
                 const deleteButton = article.querySelector(".delete-btn");
 
                 deleteButton.addEventListener("click", async () => {
-                    
-
                     const confirmDelete = confirm("Är du säker?");
                     if(!confirmDelete) return;
 
-                    const id = deleteButton.getAttribute("data-id");
-
                     try {
-                        const response = await fetch(`http://127.0.0.1:3002/workexperience/${id}`, {
+                        const response = await fetch(`http://127.0.0.1:3002/workexperience/${erf._id}`, {
                         method: "DELETE"    
                     });
 
@@ -60,13 +56,69 @@ if(list) {
                     } catch(error) {
                         console.log("Fel vid borttagning av erfarenhet: " + error);
                     }
-                })
+                });
+                
+                // ÄNDRA-knappen i varje article-element.
+                const editBtn = article.querySelector(".edit-btn");
+
+                // Händelselyssnare vid klick på knappen som tar fram formulär.
+                editBtn.addEventListener("click", () => {
+                    article.innerHTML = `
+                        <form class="edit-form">
+                            <label> Företagsnamn: <input name="companyname" value="${erf.companyname}" required></label>
+                            <label> Uppgift: <input name="task" value="${erf.task}" required></label>
+                            <label> Stad: <input name="city" value="${erf.city}" required></label>
+                            <label> År: <input name="howlongY" type="number" value="${erf.howlongY}" required></label>
+                            <label> Månader: <input name="howlongM" type="number" value="${erf.howlongM}" required></label>
+                            <button type="submit"> SPARA ÄNDRINGAR </button>
+                        </form>
+                    `;
+
+                    // Formuläret.
+                    const editForm = article.querySelector(".edit-form");
+
+                    // Händelselyssnare för formuläret som lyssnar på submit.
+                    editForm.addEventListener("submit", async (e) => {
+                        e.preventDefault(); // Förhindrar sidomladdning.
+
+                        // Uppdaterade erfarenheten.
+                        const updatedExp = {
+                            companyname: editForm.companyname.value,
+                            task: editForm.task.value,
+                            city: editForm.city.value,
+                            howlongY: editForm.howlongY.value,
+                            howlongM: editForm.howlongM.value
+                        };
+
+                        try {
+                            const response = await fetch(`http://127.0.0.1:3002/workexperience/${erf._id}`, {
+                                method: "PUT",
+                                headers: {
+                                    "Content-Type": "application/json"
+                                },
+                                body: JSON.stringify(updatedExp)
+                            });
+
+                            const result = await response.json();
+
+                            if (response.ok) {
+                                console.log("Uppdaterat erfarenhet: ", result)
+                                location.reload();
+                            } else {
+                                alert("Kunde inte uppdatera: " + result.message);
+                            }
+                        } catch (error) {
+                            console.error("Fel vid uppdatering:", error);
+                            alert("Något gick fel.");
+                        }
+                    });
+                });
             });
         })
 }
 
+// Formuläret på LÄGG TILL-sidan.
 const form = document.getElementById("expForm");
-const submitBtn = document.getElementById("submit");
 const confirmMessage = document.getElementById("confirm");
 
 if(form) {
@@ -81,6 +133,7 @@ if(form) {
         howlongM: form.howlongM.value
     };
 
+    // Kontroll om allt blivit ifyllt. Även år/mån då det är ifyllt 0.
     if (!newExp.companyname || !newExp.task || !newExp.city || !newExp.howlongY || !newExp.howlongM) {
         alert("Fyll i alla obligatoriska fält!");
         return;
@@ -98,7 +151,7 @@ if(form) {
         const result = await response.json();
         if(response.ok) {
             confirmMessage.textContent = result.message;
-            window.location.href = "index.html";
+            window.location.href = "index.html"; // skickar användaren till startsidan.
         } else {
             alert("Fel! Försök igen senare.")
             console.log(result)

@@ -76,6 +76,20 @@ main {
     cursor: pointer;
     transition: 0.5s ease;
 }
+.edit-btn {
+    padding: 10px;
+    font-size: 16px;
+    margin-top: 20px;
+    background-color: rgb(45, 182, 45);
+    color:white;
+    border: 1px solid #1A1A1A;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.5s ease;
+}
+.edit-btn:hover {
+    background-color: green;
+}
 .delete-btn:hover {
     background-color: red;
 }
@@ -115,4 +129,47 @@ main {
 }
 #expForm button:hover {
     background-color: rgb(1, 81, 1);
+}
+
+.edit-form {
+    display: flex;
+    flex-direction: column;
+    background-color: #333;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+.edit-form label {
+    padding: 10px;
+    font-size: 18px;
+    display: flex;
+    flex-direction: column;
+
+}
+
+.edit-form input {
+    padding: 7px;
+    font-size: 16px;
+}
+.edit-form button {
+    padding: 15px;
+    background-color: green;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-size: 18px;
+    font-weight: bolder;
+    cursor: pointer;
+    transition: 0.5s ease;
+    margin-top: 5px;
+}
+.edit-form button:hover {
+    background-color: rgb(1, 81, 1);
+}
+
+#noData {
+    color: black;
+}
+#noData a {
+    color: blue;
 }
