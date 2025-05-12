@@ -6,10 +6,11 @@ API:ets repo finns här: [text](https://github.com/HelmerBergstrom/Moment-3.1-ba
 ### Hemsida och Webbtjänst
 
 Denna hemsida är skapad med HTML, CSS och mestadels JavaScript. Hemsidan konsumerar en REST-webbtjänst som använder MongoDB i samband med Mongoose som databas. 
+Hemsidan hämtar lagrad data från databasen via Fetch API och använder CRUD-metoderna som REST-webbtjänsten stödjer för att skapa, radera, uppdatera och hämta erfarenheterna som ligger i databasen.
 
 #### GET 
 
-Hemsidan hämtar data från databasen via Fetch API och använder CRUD-metoderna som REST-webbtjänsten stödjer. På startsidan(index.html) listas erfarenheter ut i en lista. Erfarenheterna är tagna från databasen där de lagras. För att hämta och skriva ut dessa erfarenheter används först GET för att hämta erfarenheterna, sedan används en forEach-loop för att skriva ut dessa användaren.
+ På startsidan(index.html) listas erfarenheter ut i en lista. Erfarenheterna är tagna från databasen där de lagras. För att hämta och skriva ut dessa erfarenheter används först GET för att hämta erfarenheterna, sedan används en forEach-loop för att skriva ut dessa användaren.
 
 #### POST 
 
