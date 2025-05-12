@@ -1,7 +1,7 @@
 # Moment 3 - Webbplats
 
 Denna webbplats konsumerar ett REST API som är skapat av mig, Helmer Bergström.
-API:ets repo finns här: [text](https://github.com/HelmerBergstrom/Moment-3.1-backend/tree/dev)
+API:ets repo finns här: [link](https://github.com/HelmerBergstrom/Moment-3.1-backend/tree/dev)
 
 ### Hemsida och Webbtjänst
 
